@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "uran1980\\yii\\mdEpicEditor\\": ""
+            "uran1980\\yii\\widgets\\mdEpicEditor\\": ""
         }
     }
 }

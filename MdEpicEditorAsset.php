@@ -1,6 +1,6 @@
 <?php
 
-namespace uran1980\yii\mdEpicEditor;
+namespace uran1980\yii\widgets\mdEpicEditor;
 
 class MdEpicEditorAsset extends \yii\web\AssetBundle
 {

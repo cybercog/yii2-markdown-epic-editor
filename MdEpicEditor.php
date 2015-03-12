@@ -1,6 +1,6 @@
 <?php
 
-namespace uran1980\yii\mdEpicEditor;
+namespace uran1980\yii\widgets\mdEpicEditor;
 
 use yii\widgets\InputWidget;
 use yii\helpers\ArrayHelper;
@@ -9,6 +9,11 @@ use yii\helpers\Json;
 
 class MdEpicEditor extends InputWidget
 {
+    /**
+     * @var boolean
+     */
+    public $isRegistered = false;
+
     /**
      * EpicEditor JS options you want to override
      * See all http://epiceditor.com/#options
@@ -111,6 +116,9 @@ class MdEpicEditor extends InputWidget
         if ( empty($this->options['textarea']) ) {
             $this->options['textarea'] = 'textarea-' . $this->options['container'];
         }
+
+        $bundles = $this->view->assetManager->bundles;
+        $this->isRegistered = isset($bundles['uran1980\\yii\\widgets\\mdEpicEditor\\MdEpicEditorAsset']);
 
         $this
             ->registerAssetBundle()
