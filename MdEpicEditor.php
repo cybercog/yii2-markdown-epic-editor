@@ -117,9 +117,6 @@ class MdEpicEditor extends InputWidget
             $this->options['textarea'] = 'textarea-' . $this->options['container'];
         }
 
-        $bundles = $this->view->assetManager->bundles;
-        $this->isRegistered = isset($bundles['uran1980\\yii\\widgets\\mdEpicEditor\\MdEpicEditorAsset']);
-
         $this
             ->registerAssetBundle()
             ->registerScript()
@@ -134,8 +131,8 @@ class MdEpicEditor extends InputWidget
         $bundle = MdEpicEditorAsset::register($this->getView());
 
         // set correct basePath
-        $basePath                   = $bundle->getPublishedPath();
-        $this->options['basePath']  = ArrayHelper::getValue($basePath, 1);
+        $basePath = $this->view->assetManager->getPublishedPath($bundle->sourcePath);
+        $this->options['basePath'] = ArrayHelper::getValue($basePath, 1);
 
         return $this;
     }
@@ -145,6 +142,11 @@ class MdEpicEditor extends InputWidget
      */
     public function registerScript()
     {
+        $bundles = $this->view->assetManager->bundles;
+        if ( isset($bundles['uran1980\\yii\\widgets\\mdEpicEditor\\MdEpicEditorAsset']) ) {
+            return $this;
+        }
+
         $jsonOptions        = Json::encode($this->options);
         $jsonOptionsMarked  = Json::encode($this->optionsMarked);
         $script = <<<SCRIPT
